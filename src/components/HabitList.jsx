@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-// Fullscreen Sign In / Sign Up Modal
+// Auth Modal Component
 const AuthModal = ({ onLogin }) => {
-  const [mode, setMode] = useState("signin"); // or "signup"
+  const [mode, setMode] = useState("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +22,7 @@ const AuthModal = ({ onLogin }) => {
         return alert("Invalid credentials.");
       }
       localStorage.setItem("currentUser", email);
-      onLogin(email);
+      onLogin(email); 
     }
   };
 
@@ -70,8 +70,9 @@ const AuthModal = ({ onLogin }) => {
   );
 };
 
+// Main Habit List Component
 const HabitList = () => {
-  const [user, setUser] = useState(localStorage.getItem("currentUser"));
+  const [user, setUser] = useState(null);
   const [habits, setHabits] = useState(() => {
     const saved = localStorage.getItem("habits");
     return saved ? JSON.parse(saved) : [];
@@ -80,7 +81,13 @@ const HabitList = () => {
   const [name, setName] = useState("");
   const [type, setType] = useState("daily");
 
-  // Save habits to localStorage when changed
+  useEffect(() => {
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+      setUser(currentUser);
+    }
+  }, []);
+
   useEffect(() => {
     localStorage.setItem("habits", JSON.stringify(habits));
   }, [habits]);
@@ -118,13 +125,13 @@ const HabitList = () => {
 
       {user ? (
         <>
-          {/* Logout button */}
+          {/* Logout Button */}
           <div className="mb-6">
             <button
               onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+              className="bg-red-500 hover:bg-red-600 text-blue-900 px-4 py-2 rounded"
             >
-              Log Out
+              Log Out ({user})
             </button>
           </div>
 
@@ -165,8 +172,7 @@ const HabitList = () => {
                 className="flex justify-between items-center bg-gray-100 px-4 py-2 rounded-lg shadow"
               >
                 <div>
-                  <strong className="text-gray-800">{habit.name}</strong> (
-                  {habit.type})
+                  <strong className="text-gray-800">{habit.name}</strong> ({habit.type})
                 </div>
                 <div className="space-x-2">
                   <button

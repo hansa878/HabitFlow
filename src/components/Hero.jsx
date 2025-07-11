@@ -7,10 +7,14 @@ const Hero = () => {
   useEffect(() => {
     const getQuote = async () => {
       try {
-        const response = await fetch("/api/quote");
-        const result = await response.json();
+        const response = await fetch("https://api.api-ninjas.com/v1/quotes", {
+          headers: {
+            "X-Api-Key": "vzkK2skplp3cvcVL4CSHBA==ystFQho9hxlK5za5",
+          },
+        });
 
-        setQuote(result[0].q);
+        const result = await response.json();
+        setQuote(result[0].quote);
       } catch (error) {
         console.error("Failed to fetch quote:", error);
       }
@@ -32,7 +36,6 @@ const Hero = () => {
         >
           Add Habit
         </Link>
-        
       </div>
     </section>
   );

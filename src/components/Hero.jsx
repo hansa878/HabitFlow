@@ -12,10 +12,10 @@ const Hero = () => {
           to="/dashboard"
           className="px-6 py-3 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
         >
-          ➕ Add Habit
+        Add Habit
         </Link>
         <button className="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded hover:bg-gray-300 transition">
-          🔐 Sign In
+        Sign In
         </button>
       </div>
     </section>

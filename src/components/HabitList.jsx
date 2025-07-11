@@ -9,7 +9,7 @@ const HabitList = () => {
   const [name, setName] = useState("");
   const [type, setType] = useState("daily");
 
-  // ✅ Add Habit
+
   const addHabit = (e) => {
     e.preventDefault();
     if (!name) return;
@@ -19,20 +19,19 @@ const HabitList = () => {
     setType("daily");
   };
 
-  // ✅ Toggle Done
+
   const toggleHabit = (index) => {
     const updated = [...habits];
     updated[index].done = !updated[index].done;
     setHabits(updated);
   };
 
-  // ✅ Remove Habit
   const removeHabit = (index) => {
     const updated = habits.filter((_, i) => i !== index);
     setHabits(updated);
   };
 
-  // ✅ Save to localStorage
+  
   useEffect(() => {
     localStorage.setItem("habits", JSON.stringify(habits));
   }, [habits]);

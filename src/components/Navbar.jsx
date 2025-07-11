@@ -17,7 +17,7 @@ const Navbar = ({ user, onLogout }) => {
               Sign Out
             </button>
           ) : (
-            <span className="text-sm text-gray-300">Not Signed In</span>
+            ''
           )}
         </div>
       </div>
